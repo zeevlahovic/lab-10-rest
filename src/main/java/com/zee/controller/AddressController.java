@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/address")
 public class AddressController {
 
     private final AddressService addressService;
@@ -29,12 +29,16 @@ public class AddressController {
      "code":200
      "data":<address data>
     */
-    @GetMapping("/address/{addressNo}")
+    @GetMapping("{addressNo}")
     public ResponseEntity<ResponseWrapper> retrieveAddress(@PathVariable("addressNo") String addressNo) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(new ResponseWrapper("Address " + addressNo + "is successfully retrieved.", addressService.findByAddressNo(addressNo)));
 
+        AddressDTO foundAddress = addressService.findByAddressNo(addressNo);
+        ResponseWrapper responseWrapper = ResponseWrapper.builder()
+                .success(true)
+                .message("Address " + addressNo + " is succesfully retrived")
+                .code(HttpStatus.OK.value())
+                .data(foundAddress).build();
+        return ResponseEntity.ok(responseWrapper);
     }
 
     /*
@@ -43,7 +47,7 @@ public class AddressController {
       JSON Response Body:
       <updated address data>
      */
-    @PutMapping("/address/{addressNo}")
+    @PutMapping("{addressNo}")
     public ResponseEntity<ResponseWrapper> updateAddressNo(@PathVariable("addressNo") String addressNo, @RequestBody AddressDTO address) {
 
         return ResponseEntity.ok(new ResponseWrapper("successfully updated", addressService.update(addressNo, address)));
