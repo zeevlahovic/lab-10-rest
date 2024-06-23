@@ -48,9 +48,8 @@ public class AddressController {
       <updated address data>
      */
     @PutMapping("{addressNo}")
-    public ResponseEntity<ResponseWrapper> updateAddressNo(@PathVariable("addressNo") String addressNo, @RequestBody AddressDTO address) {
+    public AddressDTO updateAddress(@PathVariable("addressNo")String addressNo,@RequestBody AddressDTO addressDTO){
 
-        return ResponseEntity.ok(new ResponseWrapper("successfully updated", addressService.update(addressNo, address)));
-
+        return addressService.update(addressNo,addressDTO);
     }
 }
