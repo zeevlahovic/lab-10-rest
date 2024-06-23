@@ -17,16 +17,16 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-     /*
-           Endpoint: /api/v1/student
-           HTTP Status Code: 200
+    /*
+          Endpoint: /api/v1/student
+          HTTP Status Code: 200
 
-           JSON Response Body:
-           "success": true
-           "message": "Students are successfully retrieved."
-           "code":200
-           "data":<students data>
-     */
+          JSON Response Body:
+          "success": true
+          "message": "Students are successfully retrieved."
+          "code":200
+          "data":<students data>
+    */
     @GetMapping()
     public ResponseEntity<ResponseWrapper> readAllStudents() {
 
@@ -50,13 +50,12 @@ public class StudentController {
           "data":<created student data>
     */
     @PostMapping()
-    public ResponseEntity<ResponseWrapper>createStudent(@RequestBody StudentDTO studentDTO){
-        return ResponseEntity.ok(ResponseWrapper.builder()
-                .success(true)
-                .message("Student is successfully created.")
-                .code(HttpStatus.CREATED.value())
-                .data(studentService.createStudent(studentDTO))
-                .build());
+    public ResponseEntity<ResponseWrapper> createStudent(@RequestBody StudentDTO studentDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ResponseWrapper.builder().success(true)
+                        .message("Student is successfully created.")
+                        .code(HttpStatus.CREATED.value())
+                        .data(studentService.createStudent(studentDTO))
+                        .build());
     }
-
 }
