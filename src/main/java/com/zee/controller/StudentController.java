@@ -38,17 +38,9 @@ public class StudentController {
                 .build());
     }
 
-    /*
 
-          Endpoint: /api/v1/student
-          HTTP Status Code: 201
 
-          JSON Response Body:
-          "success": true
-          "message": "Student is successfully created."
-          "code":201
-          "data":<created student data>
-    */
+
     @PostMapping()
     public ResponseEntity<ResponseWrapper> createStudent(@RequestBody StudentDTO studentDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
