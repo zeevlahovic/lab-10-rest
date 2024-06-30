@@ -27,9 +27,9 @@ public class TeacherController {
       <teachers data>
    */
     @GetMapping
-    public ResponseEntity readAllTeachers() {
+    public List<TeacherDTO> readAllTeachers() {
 
-        return ResponseEntity.ok(teacherService.findAll());
+        return teacherService.findAll();
     }
 
 
