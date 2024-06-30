@@ -69,7 +69,7 @@ public class TeacherController {
     public ResponseEntity<ResponseWrapper> createTeacher(@RequestBody TeacherDTO teacherDTO){
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .header("teacherUsername")
+                .header("teacherUsername", teacherDTO.getUsername())
                 .body(ResponseWrapper.builder()
                         .success(true)
                         .message("Teacher is successfully created.")
